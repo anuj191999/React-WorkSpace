@@ -16,6 +16,7 @@ export class Destination implements Entity{
             lon:faker.location.longitude()
          };
     }
+    weight: number;
 
     popupText():string{
         return `<h3>Receiver Name: ${this.receiver}</h3>`
