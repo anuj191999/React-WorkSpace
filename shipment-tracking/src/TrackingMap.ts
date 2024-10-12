@@ -1,5 +1,12 @@
-import { Destination } from "./Destination";
-import { Cargo } from "./Cargo";
+export interface Entity{
+  location:{
+    lat:number;
+    lon:number;
+  };
+  popupText():string;
+  weight:number
+}
+
 
 export class TrackingMap {
   private googleMap: google.maps.Map;
@@ -14,13 +21,22 @@ export class TrackingMap {
     });
   }
 
-  attachMarker(entity: Destination | Cargo){
-        new google.maps.Marker({
+  attachMarker(entity: Entity){
+    const marker=new google.maps.Marker({
             map:this.googleMap,
             position:{
                 lat:entity.location.lat,
                 lng:entity.location.lon,
             },
         })
+
+    marker.addListener('click',()=>{
+      const popup=new  google.maps.InfoWindow({
+        content:entity.popupText(),
+      });
+
+      popup.open(this.googleMap,marker)
+    });
+       
   }
 }

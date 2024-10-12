@@ -14,5 +14,10 @@ export class Cargo{
             lat:faker.location.latitude(),
             lon:faker.location.longitude()
         }
+    };
+
+        popupText():string{
+        return `<h3>Cargo Name: ${this.trackingId}</h3>`
     }
+
 }
